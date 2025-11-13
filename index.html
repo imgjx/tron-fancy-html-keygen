@@ -33,18 +33,14 @@
                 </div>
                 
                 <div class="form-group" id="sequenceGroup" style="display:none">
-                    <label for="sequence" data-i18n="sequenceLabel">连号模式:</label>
-                    <input type="text" id="sequence" name="sequence" maxlength="10" placeholder="12345, AAAA, 8888">
-                    <div class="form-group">
-                        <label for="minLength" data-i18n="minLengthLabel">最小连号长度:</label>
-                        <select id="minLength" name="minLength">
-                            <option value="2">2位</option>
-                            <option value="3">3位</option>
-                            <option value="4" selected>4位</option>
-                            <option value="5">5位</option>
-                            <option value="6">6位</option>
-                        </select>
-                    </div>
+                    <label for="minLength" data-i18n="minLengthLabel">最小连号长度:</label>
+                    <select id="minLength" name="minLength">
+                        <option value="2">2位连号 (123, AAA)</option>
+                        <option value="3">3位连号 (1234, AAAA)</option>
+                        <option value="4" selected>4位连号 (12345, AAAAA)</option>
+                        <option value="5">5位连号 (123456, AAAAAA)</option>
+                        <option value="6">6位连号 (1234567, AAAAAAA)</option>
+                    </select>
                 </div>
 
                 <div class="form-group">

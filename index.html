@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON靓号生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="setLanguage('zh')">中文</button>
+            <button class="lang-btn" onclick="setLanguage('en')">English</button>
+        </div>
+
+        <div class="card">
+            <h1 data-i18n="title">TRON靓号生成器</h1>
+            <div class="subtitle" data-i18n="subtitle">高级TRON地址生成 - 多线程/连号模式</div>
+            
+            <div class="warning" data-i18n="warning">
+                ⚠️ 安全提示：此工具完全在浏览器中运行。私钥在本地生成，永远不会离开您的计算机。
+            </div>
+
+            <form id="searchForm">
+                <div class="mode-switch">
+                    <button type="button" class="mode-btn active" data-mode="suffix" data-i18n="suffixMode">后缀模式</button>
+                    <button type="button" class="mode-btn" data-mode="sequence" data-i18n="sequenceMode">连号模式</button>
+                </div>
+
+                <div class="form-group" id="suffixGroup">
+                    <label for="suffix" data-i18n="suffixLabel">期望后缀 (1-6位):</label>
+                    <input type="text" id="suffix" name="suffix" maxlength="6" placeholder="888, ABC, MOON" required>
+                </div>
+                
+                <div class="form-group" id="sequenceGroup" style="display:none">
+                    <label for="sequence" data-i18n="sequenceLabel">连号模式:</label>
+                    <input type="text" id="sequence" name="sequence" maxlength="10" placeholder="12345, AAAA, 8888">
+                    <div class="form-group">
+                        <label for="minLength" data-i18n="minLengthLabel">最小连号长度:</label>
+                        <select id="minLength" name="minLength">
+                            <option value="2">2位</option>
+                            <option value="3">3位</option>
+                            <option value="4" selected>4位</option>
+                            <option value="5">5位</option>
+                            <option value="6">6位</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="threads" data-i18n="threadsLabel">线程数量:</label>
+                    <select id="threads" name="threads">
+                        <option value="1">1 线程</option>
+                        <option value="4">4 线程</option>
+                        <option value="8" selected>8 线程</option>
+                        <option value="16">16 线程</option>
+                        <option value="32">32 线程</option>
+                        <option value="64">64 线程</option>
+                    </select>
+                </div>
+
+                <div class="difficulty">
+                    <div data-i18n="difficultyLabel">预估难度:</div>
+                    <div class="difficulty-value" id="difficultyValue">1 in 58</div>
+                    <div id="difficultyDesc" data-i18n="difficultyDesc">平均需要生成 58 个地址</div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn" id="startBtn" data-i18n="startBtn">🚀 开始搜索</button>
+                    <button type="button" class="btn btn-stop" id="stopBtn" disabled data-i18n="stopBtn">⏹️ 停止搜索</button>
+                    <button type="button" class="btn btn-download" id="downloadAllBtn" disabled data-i18n="downloadAllBtn">📥 下载全部</button>
+                    <button type="button" class="btn btn-vanity" id="downloadVanityBtn" disabled data-i18n="downloadVanityBtn">⭐ 下载靓号</button>
+                </div>
+            </form>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="attemptsCount">0</div>
+                    <div class="stat-label" data-i18n="attemptsLabel">已检查地址</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="speedCount">0/秒</div>
+                    <div class="stat-label" data-i18n="speedLabel">当前速度</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="foundCount">0</div>
+                    <div class="stat-label" data-i18n="foundLabel">找到靓号</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="threadsCount">8</div>
+                    <div class="stat-label" data-i18n="threadsCountLabel">运行线程</div>
+                </div>
+            </div>
+
+            <div id="resultsContainer"></div>
+
+            <div class="github-link">
+                <a href="https://github.com/imgjx/tron-fancy-html-keygen" target="_blank" data-i18n="githubLink">
+                    📚 在GitHub上查看
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/tronweb.js"></script>
+    <script src="./js/elliptic.js"></script>
+    <script src="./js/sha3.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
